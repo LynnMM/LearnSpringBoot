@@ -1,7 +1,6 @@
 package org.lynn.springboot.girl.controller;
 
-import org.lynn.springboot.girl.GirlApplication;
-import org.lynn.springboot.girl.dal.PersonRepository;
+import org.lynn.springboot.girl.dao.PersonDao;
 import org.lynn.springboot.girl.model.Person;
 import org.lynn.springboot.girl.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonDao personDao;
 
     @Autowired
     private PersonService personService;
@@ -25,7 +24,7 @@ public class PersonController {
      */
     @GetMapping(value = "/all")
     public List<Person> personList(){
-        return personRepository.findAll();
+        return personDao.findAll();
     }
 
     /**
@@ -39,7 +38,7 @@ public class PersonController {
         p.setName(name);
         p.setAge(age);
 
-        return personRepository.save(p);
+        return personDao.save(p);
     }
 
     /**
@@ -49,7 +48,7 @@ public class PersonController {
      */
     @GetMapping(value = "/get/{id}")
     public Person getPerson(@PathVariable("id") Integer id){
-        return personRepository.findOne(id);
+        return personDao.findById(id);
     }
 
     /**
@@ -59,7 +58,7 @@ public class PersonController {
      */
     @GetMapping(value = "/get/age/{age}")
     public List<Person> getPersonListByAge(@PathVariable("age") Integer age){
-        return personRepository.findByAge(age);
+        return personDao.findByAge(age);
     }
 
     /**
@@ -77,7 +76,7 @@ public class PersonController {
         p.setId(id);
         p.setName(name);
         p.setAge(age);
-        return personRepository.save(p);
+        return personDao.save(p);
     }
 
     /**
@@ -86,7 +85,7 @@ public class PersonController {
      */
     @DeleteMapping(value = "/delete/{id}")
     public void deletePerson(@PathVariable("id") Integer id){
-        personRepository.delete(id);
+        personDao.delete(id);
     }
 
     @PostMapping(value = "/insert2")
