@@ -3,6 +3,7 @@ package org.lynn.springboot.girl.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Person {
@@ -33,6 +34,7 @@ public class Person {
         this.name = name;
     }
 
+    @Min(value = 18, message = "Minors prohibited!")
     public Integer getAge() {
         return age;
     }

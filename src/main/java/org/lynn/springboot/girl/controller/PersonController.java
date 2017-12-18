@@ -4,8 +4,10 @@ import org.lynn.springboot.girl.dao.PersonDao;
 import org.lynn.springboot.girl.model.Person;
 import org.lynn.springboot.girl.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,16 +31,15 @@ public class PersonController {
 
     /**
      * 添加一个Person
-     * @param name
-     * @param age
+     * @param person
      */
     @PostMapping(value = "/add")
-    public Person addPerson(@RequestParam("name") String name, @RequestParam("age") Integer age){
-        Person p = new Person();
-        p.setName(name);
-        p.setAge(age);
-
-        return personDao.save(p);
+    public Person addPerson(@Valid Person person, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
+        return personDao.save(person);
     }
 
     /**
