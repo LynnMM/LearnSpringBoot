@@ -1,6 +1,6 @@
 package org.lynn.springboot.girl.dao;
 
-import org.lynn.springboot.girl.model.Person;
+import org.lynn.springboot.girl.domain.Person;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;

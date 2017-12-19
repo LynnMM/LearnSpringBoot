@@ -1,8 +1,11 @@
 package org.lynn.springboot.girl.controller;
 
 import org.lynn.springboot.girl.dao.PersonDao;
-import org.lynn.springboot.girl.model.Person;
+import org.lynn.springboot.girl.domain.Person;
+import org.lynn.springboot.girl.domain.Result;
+import org.lynn.springboot.girl.enums.ResultEnum;
 import org.lynn.springboot.girl.service.PersonService;
+import org.lynn.springboot.girl.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,12 @@ public class PersonController {
      * @param person
      */
     @PostMapping(value = "/add")
-    public Person addPerson(@Valid Person person, BindingResult bindingResult){
+    public Result<Person> addPerson(@Valid Person person, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            logger.error(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return ResultUtil.error(ResultEnum.DATA_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
-        return personDao.save(person);
+
+        return ResultUtil.success(personDao.save(person));
     }
 
     /**
@@ -95,5 +98,10 @@ public class PersonController {
     @PostMapping(value = "/insert2")
     public void insertTwoPerson(){
         personService.insertTwoPerson();
+    }
+
+    @GetMapping(value = "/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+        personService.getAge(id);
     }
 }
