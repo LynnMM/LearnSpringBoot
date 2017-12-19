@@ -36,4 +36,13 @@ public class PersonService {
             throw new PersonException(ResultEnum.MIDDLE_SCHOOL);
         }
     }
+
+    /**
+     * 通过Id查询Person的信息
+     * @param id
+     * @return
+     */
+    public Person getPersonById(Integer id){
+        return personDao.findById(id);
+    }
 }
