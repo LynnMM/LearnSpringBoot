@@ -3,6 +3,8 @@ package org.lynn.springboot.girl.controller;
 import org.lynn.springboot.girl.dao.PersonDao;
 import org.lynn.springboot.girl.model.Person;
 import org.lynn.springboot.girl.service.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/person")
 public class PersonController {
+    private final static Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
     private PersonDao personDao;
@@ -25,7 +28,7 @@ public class PersonController {
      * @return
      */
     @GetMapping(value = "/all")
-    public List<Person> personList(){
+    public List<Person> getPersonList(){
         return personDao.findAll();
     }
 
@@ -36,7 +39,7 @@ public class PersonController {
     @PostMapping(value = "/add")
     public Person addPerson(@Valid Person person, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            logger.error(bindingResult.getFieldError().getDefaultMessage());
             return null;
         }
         return personDao.save(person);
