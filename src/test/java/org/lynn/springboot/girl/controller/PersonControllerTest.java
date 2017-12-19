@@ -19,7 +19,7 @@ public class PersonControllerTest {
 
     @Test
     public void getPersonList() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/all"))
+        mvc.perform(MockMvcRequestBuilders.get("/person/all"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
         //.andExpect(MockMvcResultMatchers.context().string("abc")) 对返回的内容进行判断
     }

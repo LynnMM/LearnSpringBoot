@@ -15,7 +15,7 @@ public class Person {
     @NotNull(message = "Name is required")
     private String name;
 
-    @Min(value = 18, message = "Minors prohibited")
+    @Min(value = 18, message = "Age Minors prohibited")
     @NotNull(message = "Age is required")
     private Integer age;
 

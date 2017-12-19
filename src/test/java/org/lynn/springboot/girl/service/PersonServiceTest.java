@@ -18,6 +18,6 @@ public class PersonServiceTest {
     @Test
     public void getPersonByIdTest(){
         Person person = personService.getPersonById(2);
-        assertEquals(new Integer(13), person.getAge());
+        assertEquals(new Integer(23), person.getAge());
     }
 }
