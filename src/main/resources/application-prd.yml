@@ -6,9 +6,17 @@ server:
 person:
   name: A
   age: 18
+  addressList[0]:
+    country: China
+    provice: Hunan
+    city: Yueyang
+  addressList[1]:
+    country: China
+    provice: Hubei
+    city: Wuhan
 
 name: B
-age: 18
+age: ${random.int[0, 100]}
 content: "name: ${name}, age: ${age}"
 
 spring:
